@@ -7,6 +7,7 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
+
         <h2>タスク一覧</h2>
         <ul>
             <c:forEach var="tasks" items="${tasks}">
@@ -18,6 +19,20 @@
                 </li>
             </c:forEach>
         </ul>
+
+        <div id="pagination">
+            （全 ${tasks_count} 件）<br />
+            <c:forEach var="i" begin="1" end="${((tasks_count - 1) / 10) + 1}" step="1">
+                <c:choose>
+                    <c:when test="${i == page}">
+                        <c:out value="${i}" />&nbsp;
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/index?page=${i}"><c:out value="${i}" /></a>&nbsp;
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </div>
 
         <p><a href="${pageContext.request.contextPath}/new">新規タスクの保存</a></p>
 
